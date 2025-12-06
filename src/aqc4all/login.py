@@ -17,13 +17,6 @@ import requests
 import shutil
 import pyotp
 
-def get_browser_driver_path(browser_name):
-    candidates = ["/usr/bin", "/usr/local/bin", shutil.which(browser_name)]
-    for path in filter(None, candidates):
-        if shutil.which(browser_name, path=path):
-            return shutil.which(browser_name, path=path)
-    return shutil.which(browser_name, path=path)
-
 def launch_browser(args, USER_AGENT):
     browser_choice = args.browser.lower() if args.browser else "chromium"
 
@@ -32,8 +25,8 @@ def launch_browser(args, USER_AGENT):
         os.environ["TMPDIR"] = os.path.expanduser("~/tmp")
         os.makedirs(os.environ["TMPDIR"], exist_ok=True)
 
-        geckodriver_path = get_browser_driver_path("geckodriver")
-        if not geckodriver_path:
+        geckodriver_path = shutil.which("geckodriver")
+        if geckodriver_path is None:
             raise FileNotFoundError("geckodriver not found in PATH")
 
         print("[+] Running with Firefox browser (private mode)")
@@ -59,8 +52,8 @@ def launch_browser(args, USER_AGENT):
         return webdriver.Firefox(service=service, options=options)
 
     elif browser_choice == "chromium":
-        chromedriver_path = get_browser_driver_path("chromedriver")
-        if not chromedriver_path:
+        chromedriver_path = shutil.which("chromedriver")
+        if chromedriver_path is None:
             raise FileNotFoundError("chromedriver not found in PATH")
 
         options = ChromeOptions()
