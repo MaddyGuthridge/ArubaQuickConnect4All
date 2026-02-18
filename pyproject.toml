@@ -20,9 +20,5 @@ dependencies = [
 aqc4all = "aqc4all.main:main"
 
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-
+requires = ["uv_build>=0.10.4,<0.11.0"]
+build-backend = "uv_build"
