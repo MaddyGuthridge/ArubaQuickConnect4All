@@ -16,9 +16,38 @@ dependencies = [
     "configparser",
 ]
 
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "ruff>=0.15.1",
+]
+
 [project.scripts]
 aqc4all = "aqc4all.main:main"
 
 [build-system]
 requires = ["uv_build>=0.10.4,<0.11.0"]
 build-backend = "uv_build"
+
+[tool.mypy]
+check_untyped_defs = true
+files = ["src"]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
