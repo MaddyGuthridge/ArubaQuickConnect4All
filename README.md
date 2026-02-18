@@ -89,7 +89,7 @@ I hope you find it useful, and if you feel like contributing, please feel free t
 
 ## Development
 
-This project uses `uv` for dependency management.
+This project uses [`uv`](https://docs.astral.sh/uv/) for dependency management.
 
 
 | Task | Command |
